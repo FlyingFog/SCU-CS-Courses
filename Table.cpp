@@ -1,37 +1,92 @@
 #include<iostream>
 #include<cstdio>
 #include<cstdlib>
+#include<string>
 using namespace std;
 
 class Cell{
 public:
-  Cell(char con[]);
-  ~Cell();
+  Cell(){
+  	content = "";
+  }	
+  Cell(char con[]){
+  	content = con;
+  }
+  ~Cell(){
+  };
   void show();
 private:
   string content;
-}
-
-Cell::Cell(char con[]){
-	content = con;
-}
+};
 
 void Cell::show(){
-	cout<<content<<endl;
+	cout<<content<<"\t";
 }
 
-class Table {
+class Table{
 public: 
-  Table();
-  Table(int r,int c);
+  Table(){
+  	r = c = 0;
+  }
+  Table(int rr,int cc){
+    r = rr;
+    c = cc;
+  };
+  ~Table(){
+  };
   void show();
+  void set(int r , int c ,int con);
+  void set(int r , int c ,char con[]);
   int addRow();
   void delRow(int n);
   int addColumn();
   void delColumn(int n);
 private:
-  Cell cells;
+  int r,c;
+  Cell cells[100][100];
 };
+
+void Table::show(){
+	for(int i=1 ;i<=r ;i++){
+	cout<<i<<"\t";   
+	   for(int j=1 ;j<=c ;j++){
+	   	cells[i][j].show();
+	   }
+	cout<<endl;
+	}
+	cout<<"end show"<<endl;
+}
+
+void Table::set(int r , int c ,char con[]){
+	cells[r][c] = con;
+}
+
+void Table::set(int r , int c ,int con){
+	char t[255];
+    sprintf(t, "%d", con);
+	set(r,c,t);
+}
+
+int Table::addRow(){
+	return r = r + 1;
+}
+void Table::delRow(int n){
+	for(int i=n ;i<=r ;i++)
+		for(int j=1 ;j<=c ;j++)
+		cells[i][j] = cells[i+1][j];
+	r--;
+}
+
+int Table::addColumn(){
+	return c = c + 1;
+}
+
+void Table::delColumn(int n){
+	for(int i=n ;i<=c ;i++)
+		for(int j=1 ;j<=r ;j++)
+		cells[j][i] = cells[j][i+1];
+	c--;
+}
 
 
 int main() {
