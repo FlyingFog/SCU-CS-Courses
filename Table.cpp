@@ -1,5 +1,6 @@
 #include<iostream>
 #include<cstdio>
+#include<iomanip>
 #include<cstdlib>
 #include<string>
 using namespace std;
@@ -19,8 +20,8 @@ private:
   string content;
 };
 
-void Cell::show(){
-	cout<<content<<"\t";
+void Cell::show(){ 
+	cout<< setw(10) <<content<<"  |";
 }
 
 class Table{
@@ -48,13 +49,13 @@ private:
 
 void Table::show(){
 	for(int i=1 ;i<=r ;i++){
-	cout<<i<<"\t";   
+	cout<<i<<" |";   
 	   for(int j=1 ;j<=c ;j++){
 	   	cells[i][j].show();
 	   }
 	cout<<endl;
 	}
-	cout<<"end show"<<endl;
+	cout<<"-----end show------"<<endl;
 }
 
 void Table::set(int r , int c ,char con[]){
@@ -71,7 +72,7 @@ int Table::addRow(){
 	return r = r + 1;
 }
 void Table::delRow(int n){
-	for(int i=n ;i<=r ;i++)
+	for(int i=n ;i<=r-1 ;i++)
 		for(int j=1 ;j<=c ;j++)
 		cells[i][j] = cells[i+1][j];
 	r--;
@@ -82,7 +83,7 @@ int Table::addColumn(){
 }
 
 void Table::delColumn(int n){
-	for(int i=n ;i<=c ;i++)
+	for(int i=n ;i<=c-1 ;i++)
 		for(int j=1 ;j<=r ;j++)
 		cells[j][i] = cells[j][i+1];
 	c--;
