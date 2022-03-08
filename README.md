@@ -1,8 +1,3 @@
-# c-
+# SCU CS Courses
 
-## submit job
-The Files of C++ Course including homework and OJ practice.
-
-The course repo is [hello-world](https://github.com/FlyingFog/hello-world).
-
-
+四川大学计算机课程作业整理。
